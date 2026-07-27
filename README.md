@@ -1,3 +1,4 @@
+[README.md](https://github.com/user-attachments/files/30397330/README.md)
 
 # Portafolio de Datos — Francis Zapata
 
@@ -50,6 +51,7 @@ Comparación de 4 modelos de clasificación (Árbol de Decisión con poda por co
 ### Nota sobre los datos
 Todos los datasets utilizados son sintéticos, de fuentes abiertas (Kaggle) o generados para fines académicos. Ningún proyecto utiliza datos reales de instituciones o personas identificables.
 
+[README.en.md](https://github.com/user-attachments/files/30397331/README.en.md)
 # Data Portfolio — Francis Zapata
 
 🌐 [Leer esto en Español](./README.md)
