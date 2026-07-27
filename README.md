@@ -1,8 +1,6 @@
-[README.md](https://github.com/user-attachments/files/30397330/README.md)
+[README.md](https://github.com/user-attachments/files/30397718/README.md)[Uploadin# Portafolio de Datos — Francis Zapata
 
-# Portafolio de Datos — Francis Zapata
-
-🌐 [Leer esto en Español](./README.md) 
+🌐 [Read this in English](./README.en.md) 
 
 Análisis de datos, Business Intelligence y modelado de decisiones, desarrollados en el marco de la Maestría en Análisis de Datos y BI (UDLA) y sus diplomados asociados (SQL, Análisis de Datos, Escuela Politécnica Nacional).
 
@@ -46,15 +44,22 @@ Proyecto grupal (3 integrantes, coordinación técnica a mi cargo) sobre un data
 
 Comparación de 4 modelos de clasificación (Árbol de Decisión con poda por costo-complejidad, Bagging, Random Forest, QDA) para predecir incumplimiento de pago sobre el dataset "German Credit Data" (1,000 solicitudes de crédito), evaluando el desempeño con matrices de confusión, sensibilidad/especificidad y curvas ROC/AUC.
 
+## 7. Diseño de Base de Datos Relacional — Sistema de Gestión Clínica
+**Herramientas:** SQL
+**Carpeta:** [`sql-sistema-clinico/`](./sql-sistema-clinico)
+
+Modelado y creación de una base de datos relacional para una clínica (7 tablas con llaves foráneas: especialidad, subespecialidad, doctor, enfermedad, paciente, atención, cita), con ~200 registros de pacientes y 60 doctores. Se resolvieron consultas de negocio mediante `JOIN` y `GROUP BY`: pacientes por fecha, pacientes por doctor, enfermedad más frecuente y paciente con más enfermedades.
+
 ---
 
 ### Nota sobre los datos
 Todos los datasets utilizados son sintéticos, de fuentes abiertas (Kaggle) o generados para fines académicos. Ningún proyecto utiliza datos reales de instituciones o personas identificables.
+g README.md…]()
 
-[README.en.md](https://github.com/user-attachments/files/30397331/README.en.md)
+[README.en.md](https://github.com/user-attachments/files/30397721/README.en.md)
 # Data Portfolio — Francis Zapata
 
-🌐 [Read this in English](./README.en.md)
+🌐 [Leer esto en Español](./README.md)
 
 Data analysis, Business Intelligence, and decision modeling projects, developed as part of the Master's in Data Analysis and BI (UDLA) and its associated diploma programs (SQL, Data Analysis, Escuela Politécnica Nacional).
 
@@ -97,6 +102,12 @@ Group project (3 members, technical lead) analyzing an 8,000-user Spotify datase
 **Folder:** [`riesgo-crediticio-arboles/`](./riesgo-crediticio-arboles)
 
 Comparison of 4 classification models (pruned Decision Tree, Bagging, Random Forest, QDA) to predict loan default on the "German Credit Data" dataset (1,000 loan applications), evaluating performance with confusion matrices, sensitivity/specificity, and ROC/AUC curves.
+
+## 7. Relational Database Design — Clinic Management System
+**Tools:** SQL
+**Folder:** [`sql-sistema-clinico/`](./sql-sistema-clinico)
+
+Modeled and created a relational database for a clinic (7 tables with foreign keys: specialty, subspecialty, doctor, disease, patient, visit, appointment), with ~200 patient records and 60 doctors. Solved business queries using `JOIN` and `GROUP BY`: patients by date, patients by doctor, most frequent disease, and patient with the most diseases.
 
 ---
 
