@@ -2,7 +2,7 @@
 
 # Portafolio de Datos — Francis Zapata
 
-🌐 [Read this in English](./README.en.md)
+🌐 [Leer esto en Español](./README.md) 
 
 Análisis de datos, Business Intelligence y modelado de decisiones, desarrollados en el marco de la Maestría en Análisis de Datos y BI (UDLA) y sus diplomados asociados (SQL, Análisis de Datos, Escuela Politécnica Nacional).
 
@@ -54,7 +54,7 @@ Todos los datasets utilizados son sintéticos, de fuentes abiertas (Kaggle) o ge
 [README.en.md](https://github.com/user-attachments/files/30397331/README.en.md)
 # Data Portfolio — Francis Zapata
 
-🌐 [Leer esto en Español](./README.md)
+🌐 [Read this in English](./README.en.md)
 
 Data analysis, Business Intelligence, and decision modeling projects, developed as part of the Master's in Data Analysis and BI (UDLA) and its associated diploma programs (SQL, Data Analysis, Escuela Politécnica Nacional).
 
