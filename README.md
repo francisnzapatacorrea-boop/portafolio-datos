@@ -50,7 +50,13 @@ Proyecto grupal (3 integrantes, coordinación técnica a mi cargo) sobre un data
 
 Comparación de 4 modelos de clasificación (Árbol de Decisión con poda por costo-complejidad, Bagging, Random Forest, QDA) para predecir incumplimiento de pago sobre el dataset "German Credit Data" (1,000 solicitudes de crédito), evaluando el desempeño con matrices de confusión, sensibilidad/especificidad y curvas ROC/AUC.
 
-## 8. Diseño de Base de Datos Relacional — Sistema de Gestión Clínica
+## 8. Administración de Bases de Datos NoSQL — MongoDB Atlas
+**Herramientas:** MongoDB (mongosh, mongoimport/export, mongodump/restore)
+**Carpeta:** [`mongodb-atlas/`](./mongodb-atlas)
+
+Administración de un clúster en la nube (MongoDB Atlas): importación y exportación de colecciones, respaldo y restauración, y monitoreo en tiempo real (`mongostat`, `mongotop`). Se construyeron pipelines de agregación complejos (`$match`, `$group`, `$project`, `$filter`, `$addFields`, `$switch`) para consultas sobre datos anidados, y se aplicó un caso real de actualización masiva condicional sobre un dataset de terrazas de Madrid (más de 10 operaciones de actualización con lógica de negocio).
+
+## 9. Diseño de Base de Datos Relacional — Sistema de Gestión Clínica
 **Herramientas:** SQL
 **Carpeta:** [`sql-sistema-clinico/`](./sql-sistema-clinico)
 
@@ -60,10 +66,10 @@ Modelado y creación de una base de datos relacional para una clínica (7 tablas
 
 ### Nota sobre los datos
 Todos los datasets utilizados son sintéticos, de fuentes abiertas (Kaggle) o generados para fines académicos. Ningún proyecto utiliza datos reales de instituciones o personas identificables.
-[README.md](https://github.com/user-attachments/files/30566358/README.md)
+[README.md](https://github.com/user-attachments/files/30566549/README.md)
 
-[README.en.md](https://github.com/user-attachments/files/30566365/README.en.md)
-# Data Portfolio — Francis Zapata
+
+[README.en.md](https://github.com/user-attachments/files/30566553/README.en.md)# Data Portfolio — Francis Zapata
 
 🌐 [Leer esto en Español](./README.md)
 
@@ -115,7 +121,13 @@ Group project (3 members, technical lead) analyzing an 8,000-user Spotify datase
 
 Comparison of 4 classification models (pruned Decision Tree, Bagging, Random Forest, QDA) to predict loan default on the "German Credit Data" dataset (1,000 loan applications), evaluating performance with confusion matrices, sensitivity/specificity, and ROC/AUC curves.
 
-## 8. Relational Database Design — Clinic Management System
+## 8. NoSQL Database Administration — MongoDB Atlas
+**Tools:** MongoDB (mongosh, mongoimport/export, mongodump/restore)
+**Folder:** [`mongodb-atlas/`](./mongodb-atlas)
+
+Administered a cloud cluster (MongoDB Atlas): collection import/export, backup and restore, and real-time monitoring (`mongostat`, `mongotop`). Built complex aggregation pipelines (`$match`, `$group`, `$project`, `$filter`, `$addFields`, `$switch`) for queries over nested data, and applied a real-world case of conditional bulk updates on a Madrid sidewalk-terrace dataset (10+ update operations with business logic).
+
+## 9. Relational Database Design — Clinic Management System
 **Tools:** SQL
 **Folder:** [`sql-sistema-clinico/`](./sql-sistema-clinico)
 
