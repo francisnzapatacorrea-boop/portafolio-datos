@@ -1,0 +1,202 @@
+///////////////////////////////////////////////////////////
+///////////////////// MONITOREO ////////////////////////////
+///////////////////////////////////////////////////////////
+
+// Estadísticas en tiempo real
+mongostat.exe --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/" --username francis --password francis --authenticationDatabase "admin"
+
+// Uso de colecciones cada 5 segundos
+mongotop.exe --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/" --username francis --password francis --authenticationDatabase "admin" 5
+
+
+///////////////////////////////////////////////////////////
+///////////////////// IMPORTACIÓN //////////////////////////
+///////////////////////////////////////////////////////////
+
+// Base inspections
+mongoimport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/inspections" --collection city_ispections --file act-7_8_city_inspections.json
+
+// Base countries
+mongoimport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/countries" --collection countries_small --file act-7_8_countries-small.json
+
+mongoimport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/countries" --collection countries_big --file act-7_8_countries-big.json
+
+
+///////////////////////////////////////////////////////////
+///////////////////// EXPORTACIÓN //////////////////////////
+///////////////////////////////////////////////////////////
+
+mongoexport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/inspections" --collection city_ispections --out "inspections.json"
+
+
+///////////////////////////////////////////////////////////
+///////////////////// BACKUP ///////////////////////////////
+///////////////////////////////////////////////////////////
+
+// Backup
+mongodump.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/countries" --out "C:\Users\NW\Desktop\dump"
+
+// Restauración
+mongorestore.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/" "C:\Users\NW\Desktop\dump"
+
+
+///////////////////////////////////////////////////////////
+///////////////////// CASO MADRID //////////////////////////
+///////////////////////////////////////////////////////////
+
+// Importación dataset terrazas
+mongoimport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/madrid" --collection terrazas --file act-7_8_openDataLocalesMadrid1.json --jsonArray
+
+// Seleccionar base
+use madrid
+
+
+///////////////////////////////////////////////////////////
+///////////////////// ACTUALIZACIONES //////////////////////
+///////////////////////////////////////////////////////////
+
+// a) Cerrar locales Guindalera (Salamanca)
+db.terrazas.updateMany(
+{
+  desc_distrito_local: "SALAMANCA",
+  desc_barrio_local: "GUINDALERA"
+},
+{
+  $set: {
+    desc_situacion_local: "Cerrado",
+    desc_situacion_terraza: "Cerrada"
+  }
+}
+)
+
+
+// b) Campo inspeccionar según mesas (optimizado)
+db.terrazas.updateMany(
+{
+  desc_ubicacion_terraza: "Calle peatonal"
+},
+[
+{
+  $set: {
+    inspeccionar: {
+      $cond: [
+        { $gt: ["$mesas_es", 10] },
+        true,
+        false
+      ]
+    }
+  }
+}
+]
+)
+
+
+// c) Añadir mesas auxiliares y sillas
+db.terrazas.updateMany(
+{ inspeccionar: true },
+{
+  $set: {
+    mesas_aux_es: 2,
+    sillas_es: 8
+  }
+}
+)
+
+
+// d) Campo estado (optimizado con switch)
+db.terrazas.updateMany(
+{ inspeccionar: false },
+[
+{
+  $set: {
+    estado: {
+      $switch: {
+        branches: [
+          { case: { $lt: ["$sillas_es", 10] }, then: 1 },
+          {
+            case: {
+              $and: [
+                { $gte: ["$sillas_es", 10] },
+                { $lte: ["$sillas_es", 20] }
+              ]
+            },
+            then: 2
+          }
+        ],
+        default: 3
+      }
+    }
+  }
+}
+]
+)
+
+
+// e) Lunes a jueves → máximo 00:00
+db.terrazas.updateMany(
+{},
+[
+{
+  $set: {
+    hora_fin_LJ_es: {
+      $cond: [
+        { $gt: ["$hora_fin_LJ_es", "00:00:00"] },
+        "00:00:00",
+        "$hora_fin_LJ_es"
+      ]
+    }
+  }
+}
+]
+)
+
+
+// f) Viernes-sábado → 2:30 a 2:00
+db.terrazas.updateMany(
+{ hora_fin_VS_es: "02:30:00" },
+{ $set: { hora_fin_VS_es: "02:00:00" } }
+)
+
+
+// g) Calle Alcalá → inspeccionar
+db.terrazas.updateMany(
+{ DESC_NOMBRE: /ALCALA/i },
+{ $set: { inspeccionar: true } }
+)
+
+
+// h) Añadir revisión
+db.terrazas.updateMany(
+{
+  desc_situacion_terraza: "Abierta",
+  revision: { $exists: false }
+},
+{
+  $set: {
+    revision: {
+      prox_inspeccion: 10,
+      puntuacion: 80,
+      comentario: "separar las mesas"
+    }
+  }
+}
+)
+
+
+// i) Crear zona1 (Villaverde)
+db.terrazas.aggregate([
+{ $match: { desc_distrito_local: "VILLAVERDE" } },
+{ $out: "zona1" }
+])
+
+
+// j) Crear zona2 (Salamanca - Castellana)
+db.terrazas.aggregate([
+{
+  $match: {
+    desc_distrito_local: "SALAMANCA",
+    desc_barrio_local: "CASTELLANA"
+  }
+},
+{ $out: "zona2" }
+])

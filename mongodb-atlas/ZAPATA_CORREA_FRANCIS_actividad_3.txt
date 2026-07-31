@@ -1,0 +1,225 @@
+///////////////////////////////////////////////////////////
+///////////////////// CARGA DE DATOS //////////////////////
+///////////////////////////////////////////////////////////
+
+// Conexión al cluster con usuario francis
+mongosh.exe "mongodb+srv://cluster0.bclvpgg.mongodb.net/" --apiVersion 1 --username francis
+
+// Conexión alternativa con usuario udla2026
+mongosh.exe "mongodb+srv://cluster0.bclvpgg.mongodb.net/" --apiVersion 1 --username udla2026
+
+// Importar colección books
+mongoimport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/miscelanea" --collection books --file act-3_4_books.json
+
+// Importar colección companies
+mongoimport.exe --username francis --password francis --uri "mongodb+srv://cluster0.bclvpgg.mongodb.net/miscelanea" --collection companies --file act-3_4_companies.json
+
+// Seleccionar base de datos
+use miscelanea
+
+// Mostrar colecciones existentes
+show collections
+
+///////////////////////////////////////////////////////////
+//////////////// CONSULTA COLECCIÓN COMPANIES /////////////////
+///////////////////////////////////////////////////////////
+
+// Tamaño de la colección en bytes
+db.companies.dataSize()
+
+// Total de compañias
+db.companies.countDocuments()
+
+//¿Cuántas compañías se fundaron en los años 1996, 1997, 2001 y 2005 respectivamente?
+
+db.companies.aggregate([
+  {
+    $match: {
+      founded_year: { $in: [1996, 1997, 2001, 2005] }
+    }
+  },
+  {
+    $group: {
+      _id: "$founded_year",
+      total_companies: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+
+
+
+// Lista las compañías dedicadas a "web" o "mobile"
+// Mostrar: nombre, descripción, número de empleados, email,
+// año, mes y día de fundación
+
+db.companies.aggregate([
+{
+  $match: {
+    category_code: { $in: ["web","mobile"] }
+  }
+},
+{
+  $project: {
+    _id: 0,
+    name: 1,
+    description: 1,
+    number_of_employees: 1,
+    email_address: 1,
+    founded_year: 1,
+    founded_month: 1,
+    founded_day: 1
+  }
+},
+{
+  $sort: { name: 1 }
+}
+]).forEach(function(valor, indice){
+print(
+"Empresa: " + valor.name +
+" | Empleados: " + valor.number_of_employees +
+" | Email: " + valor.email_address +
+" | Fundacion: " + valor.founded_year + "-" + valor.founded_month + "-" + valor.founded_day +
+" | Registro: " + indice
+);
+});
+
+
+// Lista las compañías dedicadas a videojuegos
+// ordenadas en forma descendente según el año de fundación
+
+db.companies.aggregate([
+{
+  $match:{
+    category_code:"games_video",
+    founded_year:{ $ne:null }
+  }
+},
+{
+  $project:{
+    name:1,
+    founded_year:1
+  }
+},
+{
+  $sort:{ founded_year:-1 }
+}
+]).forEach(function(valor){
+print("Empresa: "+valor.name+" | Año: "+valor.founded_year);
+});
+
+
+//¿Cuántas compañías tienen 600 o más empleados?
+
+db.companies.aggregate([
+  {
+    $match: {
+      number_of_employees: { $gte: 600 }
+    }
+  },
+  {
+    $count: "total_companies"
+  }
+])
+
+
+
+// Nombre, URL, usuario de Twitter y número de empleados
+// compañías fundadas entre 2001 y 2005 (incluidos)
+// con 500 o más empleados
+// dedicadas a videojuegos o música
+
+db.companies.aggregate([
+  {
+    $match: {
+      founded_year: { $gte: 2001, $lte: 2005 },
+      number_of_employees: { $gte: 500 },
+      category_code: { $in: ["games_video", "music"] }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      homepage_url: 1,
+      twitter_username: 1,
+      number_of_employees: 1
+    }
+  }
+])
+
+
+// Verificar si alguna empresa se dedica a videojuegos y música al mismo tiempo
+// (solo funcionaría si category_code fuera un array)
+
+db.companies.find({
+  category_code: { $all: ["games_video", "music"] }
+})
+
+
+// Lista las empresas que cuentan con única y exclusivamente 2 oficinas en la ciudad de San Francisco
+
+db.companies.aggregate([
+{
+ $match:{
+  "offices.city":"San Francisco"
+ }
+},
+{
+ $project:{
+  name:1,
+  offices:1
+ }
+},
+{
+ $addFields:{
+  oficinasSF:{
+   $size:{
+    $filter:{
+     input:"$offices",
+     as:"oficina",
+     cond:{ $eq:["$$oficina.city","San Francisco"] }
+    }
+   }
+  }
+ }
+},
+{
+ $match:{
+  oficinasSF:2
+ }
+}
+]).forEach(function(valor,indice){
+print("Empresa: " + valor.name + " | Oficinas en San Francisco: 2 | Registro No. " + indice);
+});
+
+// Nombre, mes y día de adquisición de empresas de videojuegos
+// adquiridas en 2007 por un precio >= 10 millones
+// que tengan oficinas en Culver City
+
+db.companies.aggregate([
+{
+ $match:{
+  category_code:"games_video",
+  "acquisition.acquired_year":2007,
+  "acquisition.price_amount":{ $gte:10000000 },
+  "offices.city":"Culver City"
+ }
+},
+{
+ $project:{
+  name:1,
+  "acquisition.acquired_month":1,
+  "acquisition.acquired_day":1
+ }
+}
+]).forEach(function(valor,indice){
+print(
+"Empresa: " + valor.name +
+" | Mes de adquisición: " + valor.acquisition.acquired_month +
+" | Día de adquisición: " + valor.acquisition.acquired_day +
+" | Registro No. " + indice
+);
+});
