@@ -1,4 +1,4 @@
-[README.en(1).md](https://github.com/user-attachments/files/30642726/README.en.1.md)[README(1).md](https://github.com/user-attachments/files/30642723/README.1.md)
+[README.md](https://github.com/user-attachments/files/30642739/README.md)
 # Portafolio de Datos — Francis Zapata
 
 🌐 [Read this in English](./README.en.md)
@@ -69,8 +69,7 @@ Modelado y creación de una base de datos relacional para una clínica (7 tablas
 Todos los datasets utilizados son sintéticos, de fuentes abiertas (Kaggle) o generados para fines académicos. Ningún proyecto utiliza datos reales de instituciones o personas identificables.
 
 
-
-[Uploading README.en(1).md# Data Portfolio — Francis Zapata
+# Data Portfolio — Francis Zapata
 
 🌐 [Leer esto en Español](./README.md)
 
@@ -138,5 +137,12 @@ Modeled and created a relational database for a clinic (7 tables with foreign ke
 
 ### Note on data
 All datasets used are synthetic, from open sources (Kaggle), or generated for academic purposes. No project uses real data from institutions or identifiable individuals.
-…]()
 
+
+
+
+
+
+
+
+[README.en.md](https://github.com/user-attachments/files/30642749/README.en.md)
