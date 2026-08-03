@@ -1,3 +1,4 @@
+[README.en(1).md](https://github.com/user-attachments/files/30642726/README.en.1.md)[README(1).md](https://github.com/user-attachments/files/30642723/README.1.md)
 # Portafolio de Datos — Francis Zapata
 
 🌐 [Read this in English](./README.en.md)
@@ -27,10 +28,10 @@ Estandarización de un dataset de 10,051 registros de llamadas policiales de San
 Segmentación no supervisada de empleados (empresa ficticia "Creative HR") mediante K-Means, determinando el número óptimo de clusters con el método del codo y visualizando los resultados con PCA. Los clusters se perfilaron con gráficos de violín y se validaron con un clasificador Random Forest para identificar las variables más influyentes en la segmentación (ingreso mensual, satisfacción laboral, satisfacción en las relaciones laborales).
 
 ## 4. Análisis de Mercado Bursátil — Bolsa de Valores de Quito
-**Herramientas:** Power BI
+**Herramientas:** Power BI (DAX)
 **Carpeta:** [`bolsa-quito-powerbi/`](./bolsa-quito-powerbi)
 
-Informe multianual (2019–2023) sobre comisiones del mercado bursátil ecuatoriano, comparando la Bolsa de Valores de Quito y la de Guayaquil. Incluye análisis de Pareto para identificar las casas de valores que concentran el 80% de las comisiones, segmentación por tipo de instrumento financiero (renta fija/variable) y evolución de la participación de mercado por año.
+Informe multianual (2019–2023) sobre comisiones del mercado bursátil ecuatoriano, comparando la Bolsa de Valores de Quito y la de Guayaquil. Se construyeron medidas DAX personalizadas (uso de `CALCULATE`, `FILTER` y `DIVIDE`) para el cálculo de comisiones por bolsa y variación porcentual año a año, además de una tabla de calendario dinámica. Incluye análisis de Pareto para identificar las casas de valores que concentran el 80% de las comisiones, segmentación por tipo de instrumento financiero (renta fija/variable) y evolución de la participación de mercado por año.
 
 ## 5. Modelo de Optimización de Distribución Energética — ElectroLatam S.A.
 **Herramientas:** AMPL, CPLEX, Excel Solver
@@ -66,10 +67,10 @@ Modelado y creación de una base de datos relacional para una clínica (7 tablas
 
 ### Nota sobre los datos
 Todos los datasets utilizados son sintéticos, de fuentes abiertas (Kaggle) o generados para fines académicos. Ningún proyecto utiliza datos reales de instituciones o personas identificables.
-[README.md](https://github.com/user-attachments/files/30566549/README.md)
 
 
-[README.en.md](https://github.com/user-attachments/files/30566553/README.en.md)# Data Portfolio — Francis Zapata
+
+[Uploading README.en(1).md# Data Portfolio — Francis Zapata
 
 🌐 [Leer esto en Español](./README.md)
 
@@ -98,10 +99,10 @@ Standardized a dataset of 10,051 San Francisco police call records, whose incide
 Unsupervised employee segmentation (fictional company "Creative HR") using K-Means, determining the optimal number of clusters with the elbow method and visualizing results with PCA. Clusters were profiled with violin plots and validated with a Random Forest classifier to identify the most influential variables in the segmentation (monthly income, job satisfaction, relationship satisfaction).
 
 ## 4. Stock Market Analysis — Quito Stock Exchange
-**Tools:** Power BI
+**Tools:** Power BI (DAX)
 **Folder:** [`bolsa-quito-powerbi/`](./bolsa-quito-powerbi)
 
-Multi-year report (2019–2023) on commissions in the Ecuadorian stock market, comparing the Quito and Guayaquil stock exchanges. Includes Pareto analysis to identify the brokerage firms concentrating 80% of commissions, segmentation by financial instrument type (fixed/variable income), and market share evolution by year.
+Multi-year report (2019–2023) on commissions in the Ecuadorian stock market, comparing the Quito and Guayaquil stock exchanges. Built custom DAX measures (using `CALCULATE`, `FILTER`, and `DIVIDE`) to calculate commissions by exchange and year-over-year percentage variation, plus a dynamic calendar table. Includes Pareto analysis to identify the brokerage firms concentrating 80% of commissions, segmentation by financial instrument type (fixed/variable income), and market share evolution by year.
 
 ## 5. Energy Distribution Optimization Model — ElectroLatam S.A.
 **Tools:** AMPL, CPLEX, Excel Solver
@@ -137,6 +138,5 @@ Modeled and created a relational database for a clinic (7 tables with foreign ke
 
 ### Note on data
 All datasets used are synthetic, from open sources (Kaggle), or generated for academic purposes. No project uses real data from institutions or identifiable individuals.
-
-
+…]()
 
